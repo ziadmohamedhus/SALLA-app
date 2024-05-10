@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       create: (BuildContext context) { return AppCubit()..get_homepage_data()..get_categories_data()..get_favorites()..get_user_profile(); },
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: is_dark?ThemeData.dark():ThemeData.light(),
+        theme: ThemeData(bottomNavigationBarTheme: BottomNavigationBarThemeData(selectedItemColor: Color(0xff710019))),
         debugShowCheckedModeBanner: false,
         home: widget,
       ),

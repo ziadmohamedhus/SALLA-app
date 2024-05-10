@@ -10,6 +10,7 @@ import 'package:store_app/SCREANS/home-page.dart';
 import 'package:store_app/SHARED-PREFERANCE/shared-pre.dart';
 
 import '../REGISTER/register.dart';
+import 'custom_painter.dart';
 
 class Login extends StatelessWidget {
    Login({Key? key}) : super(key: key);
@@ -63,19 +64,38 @@ class Login extends StatelessWidget {
 
 
         builder: (BuildContext context, state) { return  Scaffold(
-          appBar: AppBar(backgroundColor: Colors.transparent,elevation: 0,),
-          body: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Form(
-              key: Submit_Key,
-              child: SingleChildScrollView(
+          //appBar: AppBar(backgroundColor: Colors.transparent,elevation: 0,),
+          body: Form(
+            key: Submit_Key,
+            child: SingleChildScrollView(
+              child: CustomPaint(
+                painter: MyCustomPainter(height: 810),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('LOGIN',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35),),
-                    SizedBox(height: 10,),
-                    Text('login now to browse our hot offers',style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold,fontSize: 15),),
-                    SizedBox(height: 30,),
+                    SizedBox(height: 150,),
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Login',
+                            style: TextStyle(
+                                //fontFamily: Kprimaryfont,
+                                fontSize: 55,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            'Welcome our app',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                //fontFamily: Kprimaryfont,
+                                fontWeight: FontWeight.bold),
+                          )
+                          ],
+                        ),
+                    SizedBox(height: 130,),
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       controller: email_controller,
@@ -89,9 +109,12 @@ class Login extends StatelessWidget {
                       decoration: InputDecoration(
                           labelText: 'EMAIL',
                           hintText: 'Enter your Email',
+                          hintStyle: TextStyle(color: Color(0xff710019)),
                           prefixIcon: Icon(Icons.email_outlined),
                           suffixIcon: Icon(Icons.check),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                        focusedBorder: textFormBorder(),
+                        enabledBorder: textFormBorder(),
                       ),
                     ),
                     SizedBox(height: 15.0,),
@@ -109,12 +132,15 @@ class Login extends StatelessWidget {
                       decoration: InputDecoration(
                           labelText: 'Password',
                           hintText: 'Enter your Password',
+                          hintStyle: TextStyle(color: Color(0xff710019)),
                           prefixIcon: Icon(Icons.lock_outline_rounded),
                           suffixIcon: IconButton(onPressed: (){
                             Login_Cubit.get(context).Change_icon_password();
 
                             }, icon: Icon(Login_Cubit.get(context).suffix),),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                        focusedBorder: textFormBorder(),
+                        enabledBorder: textFormBorder(),
                       ),
                     ),
                     SizedBox(height: 25.0,),
@@ -123,7 +149,15 @@ class Login extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xff710019),
+                            Color.fromARGB(255, 234, 173, 173)
+                          ], // Define your gradient colors here
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: [0.0, 1.0], // Optional: define stops for the gradient
+                        ),
                         borderRadius: BorderRadius.circular(10),
 
 
@@ -158,7 +192,7 @@ class Login extends StatelessWidget {
                           },
                           child: Text(
                             'Register Now',
-                            style: TextStyle(color: Colors.blue),
+                            style: TextStyle(color: Color(0xff710019)),
                           ),
                         ),
                       ],
@@ -175,4 +209,11 @@ class Login extends StatelessWidget {
       ),
     );
   }
+   OutlineInputBorder textFormBorder() {
+     return OutlineInputBorder(
+         borderRadius: BorderRadius.all(Radius.circular(16.0)),
+         borderSide: BorderSide(
+             color: Color(0xff710019),
+             ));
+     }
 }
