@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
+
 import '../MODELS/product-details-model.dart';
 
 String? token='';
-bool is_dark=false;
+
+Color color=Color(0xff710019);

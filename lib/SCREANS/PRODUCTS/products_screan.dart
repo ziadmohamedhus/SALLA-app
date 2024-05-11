@@ -9,6 +9,7 @@ import 'package:store_app/MODELS/categories-model.dart';
 import 'package:store_app/MODELS/home-model.dart';
 import 'package:store_app/SCREANS/PRODUCTS/view-product.dart';
 
+import '../../COMPONENTS/components.dart';
 import '../../COMPONENTS/navigators.dart';
 import '../CATEGORIES/categories-details.dart';
 
@@ -23,7 +24,7 @@ class Products_screan extends StatelessWidget {
           return  ConditionalBuilder(
               condition: AppCubit.get(context).homeModel != null && AppCubit.get(context).categoriesModel != null,
               builder: (context)=> Home_builder(AppCubit.get(context).homeModel,AppCubit.get(context).categoriesModel,context),
-              fallback: (context)=>Center(child: CircularProgressIndicator()) );
+              fallback: (context)=>Center(child: CircularProgressIndicator(color: color,)) );
         },
 
     );

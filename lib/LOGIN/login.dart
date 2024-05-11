@@ -70,136 +70,145 @@ class Login extends StatelessWidget {
             child: SingleChildScrollView(
               child: CustomPaint(
                 painter: MyCustomPainter(height: 810),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 150,),
-                    Column(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 150,),
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Login',
+                              style: TextStyle(
+                                  //fontFamily: Kprimaryfont,
+                                  fontSize: 55,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              'Welcome our app',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  //fontFamily: Kprimaryfont,
+                                  fontWeight: FontWeight.bold),
+                            )
+                            ],
+                          ),
+                      SizedBox(height: 130,),
+                      TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        controller: email_controller,
+                        validator:
+                            ( value){
+                          if (value!.isEmpty) {
+                            return'please enter your Email';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                            labelText: 'EMAIL',
+                          hintText: 'Enter your Email',
+                            labelStyle: TextStyle(color: Color(0xff710019)),
+                            hintStyle: TextStyle(color: Color(0xff710019)),
+                            prefixIcon: Icon(Icons.email_outlined),
+                            suffixIcon: Icon(Icons.check),
+                             prefixIconColor: color,
+                            suffixIconColor: color,
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                          focusedBorder: textFormBorder(),
+                          enabledBorder: textFormBorder(),
+                        ),
+                      ),
+                      SizedBox(height: 15.0,),
+                      TextFormField(
+                        obscureText: Login_Cubit.get(context).pass,
+                        keyboardType: TextInputType.text,
+                        controller: password_controller,
+                        validator:
+                            ( value){
+                          if (value!.isEmpty) {
+                            return'please enter your Password';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                            labelText: 'Password',
+                            labelStyle: TextStyle(color: Color(0xff710019)),
+                            hintText: 'Enter your Password',
+                            hintStyle: TextStyle(color: Color(0xff710019)),
+                            prefixIcon: Icon(Icons.lock_outline_rounded),
+                          prefixIconColor: color,
+                          suffixIconColor: color,
+                            suffixIcon: IconButton(onPressed: (){
+                              Login_Cubit.get(context).Change_icon_password();
+
+                              }, icon: Icon(Login_Cubit.get(context).suffix),),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                          focusedBorder: textFormBorder(),
+                          enabledBorder: textFormBorder(),
+                        ),
+                      ),
+                      SizedBox(height: 25.0,),
+                      //Submit
+                      if(state is! Login_Loding_State)
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xff710019),
+                              Color.fromARGB(255, 234, 173, 173)
+                            ], // Define your gradient colors here
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            stops: [0.0, 1.0], // Optional: define stops for the gradient
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+
+
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(7.0),
+                          child: MaterialButton(onPressed: ()
+                          {
+                            if (Submit_Key.currentState!.validate())
+                            {
+                              Login_Cubit.get(context).Login_function(email: email_controller.text, password: password_controller.text);
+
+
+                            }
+                          },child: Text('SUBMIT',style: TextStyle(fontSize: 30,color: Colors.white),),),
+                        ),
+                      )
+                      else
+                        Center(child: CircularProgressIndicator()),
+
+
+                      SizedBox(height: 10.0,),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Login',
-                            style: TextStyle(
-                                //fontFamily: Kprimaryfont,
-                                fontSize: 55,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
+                            'Don\'t have an account?',
                           ),
-                          Text(
-                            'Welcome our app',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                //fontFamily: Kprimaryfont,
-                                fontWeight: FontWeight.bold),
-                          )
-                          ],
-                        ),
-                    SizedBox(height: 130,),
-                    TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: email_controller,
-                      validator:
-                          ( value){
-                        if (value!.isEmpty) {
-                          return'please enter your Email';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          labelText: 'EMAIL',
-                          hintText: 'Enter your Email',
-                          hintStyle: TextStyle(color: Color(0xff710019)),
-                          prefixIcon: Icon(Icons.email_outlined),
-                          suffixIcon: Icon(Icons.check),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-                        focusedBorder: textFormBorder(),
-                        enabledBorder: textFormBorder(),
-                      ),
-                    ),
-                    SizedBox(height: 15.0,),
-                    TextFormField(
-                      obscureText: Login_Cubit.get(context).pass,
-                      keyboardType: TextInputType.text,
-                      controller: password_controller,
-                      validator:
-                          ( value){
-                        if (value!.isEmpty) {
-                          return'please enter your Password';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          labelText: 'Password',
-                          hintText: 'Enter your Password',
-                          hintStyle: TextStyle(color: Color(0xff710019)),
-                          prefixIcon: Icon(Icons.lock_outline_rounded),
-                          suffixIcon: IconButton(onPressed: (){
-                            Login_Cubit.get(context).Change_icon_password();
-
-                            }, icon: Icon(Login_Cubit.get(context).suffix),),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-                        focusedBorder: textFormBorder(),
-                        enabledBorder: textFormBorder(),
-                      ),
-                    ),
-                    SizedBox(height: 25.0,),
-                    //Submit
-                    if(state is! Login_Loding_State)
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xff710019),
-                            Color.fromARGB(255, 234, 173, 173)
-                          ], // Define your gradient colors here
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          stops: [0.0, 1.0], // Optional: define stops for the gradient
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-
-
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(7.0),
-                        child: MaterialButton(onPressed: ()
-                        {
-                          if (Submit_Key.currentState!.validate())
-                          {
-                            Login_Cubit.get(context).Login_function(email: email_controller.text, password: password_controller.text);
-
-
-                          }
-                        },child: Text('SUBMIT',style: TextStyle(fontSize: 30,color: Colors.white),),),
-                      ),
-                    )
-                    else
-                      Center(child: CircularProgressIndicator()),
-
-
-                    SizedBox(height: 10.0,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Don\'t have an account?',
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator_To(context, Register_screan());
-                          },
-                          child: Text(
-                            'Register Now',
-                            style: TextStyle(color: Color(0xff710019)),
+                          TextButton(
+                            onPressed: () {
+                              Navigator_To(context, Register_screan());
+                            },
+                            child: Text(
+                              'Register Now',
+                              style: TextStyle(color: Color(0xff710019)),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
 
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

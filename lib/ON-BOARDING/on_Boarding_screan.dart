@@ -6,6 +6,8 @@ import 'package:store_app/COMPONENTS/navigators.dart';
 import 'package:store_app/LOGIN/login.dart';
 import 'package:store_app/SHARED-PREFERANCE/shared-pre.dart';
 
+import '../COMPONENTS/components.dart';
+
 class On_BordinBoarding extends StatefulWidget {
 
 
@@ -23,6 +25,7 @@ class _On_BordinBoardingState extends State<On_BordinBoarding> {
   var Boarding_controler=PageController();
 
   bool is_last=false;
+  int ind = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +33,18 @@ class _On_BordinBoardingState extends State<On_BordinBoarding> {
 
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+          leading: Row(
+            children: [
+            SizedBox(
+            width: 2,
+          ),
+          Text(
+            "${ind}",
+            style: TextStyle(color: color),
+          ),
+          Text("/3",style: TextStyle(color: Colors.black),),
+          ],
+      ),
         elevation: 0,
         actions: [
           TextButton(onPressed: (){
@@ -46,7 +61,7 @@ class _On_BordinBoardingState extends State<On_BordinBoarding> {
                        }
                    });
             },
-              child: Text('SKIP'))],),
+              child: Text('SKIP',style: TextStyle(color: color),))],),
       body:Padding(
         padding: const EdgeInsets.all(30.0),
         child: Column(
@@ -61,6 +76,9 @@ class _On_BordinBoardingState extends State<On_BordinBoarding> {
                 //to remove shadow after first and last page
                 physics: BouncingScrollPhysics(),
                 onPageChanged: (index){
+                  setState(() {
+                    ind = index + 1;
+                    });
                   if(index==Boarding_list.length-1)
                     {
                       is_last=true;
@@ -79,7 +97,7 @@ class _On_BordinBoardingState extends State<On_BordinBoarding> {
                     count: Boarding_list.length,
                     effect: ExpandingDotsEffect(
                       dotColor: Colors.grey,
-                      activeDotColor: Colors.blue,
+                      activeDotColor: Color(0xff710019),
                       dotHeight: 10,
                       dotWidth: 10,
                       spacing: 5,
@@ -88,7 +106,7 @@ class _On_BordinBoardingState extends State<On_BordinBoarding> {
                 ),
                 Spacer(),
                 FloatingActionButton(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Color(0xff710019),
                   onPressed: (){
                     if(is_last==true)
                       {
