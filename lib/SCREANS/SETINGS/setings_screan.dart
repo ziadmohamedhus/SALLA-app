@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../BLOCK/cubit.dart';
 import '../../BLOCK/states.dart';
+import '../../COMPONENTS/components.dart';
 import '../../COMPONENTS/navigators.dart';
 import '../../LOGIN/login.dart';
 import '../../MODELS/login-model.dart';
@@ -111,7 +112,15 @@ class Setings_screan extends StatelessWidget {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.blue,
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xff710019),
+                    Color.fromARGB(255, 234, 173, 173)
+                  ], // Define your gradient colors here
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [0.0, 1.0], // Optional: define stops for the gradient
+                ),
                 borderRadius: BorderRadius.circular(10),
 
 

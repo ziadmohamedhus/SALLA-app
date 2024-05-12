@@ -22,8 +22,9 @@ class Home_page extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title:Text('SALLA',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-            backgroundColor: Colors.transparent,elevation: 0,
+            title:Text('SALLA',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+            centerTitle: true,
+            //backgroundColor: Colors.transparent,elevation: 0,
             actions: [
               IconButton(onPressed: (){
               Navigator_To(context, Search_screan());

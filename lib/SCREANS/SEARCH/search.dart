@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store_app/COMPONENTS/components.dart';
 import 'package:store_app/COMPONENTS/navigators.dart';
 
 import '../../MODELS/search-model.dart';
@@ -39,9 +40,14 @@ class Search_screan extends StatelessWidget {
                       decoration: InputDecoration(
                           labelText: 'SEARCH',
                           hintText: 'Enter your text',
+                        labelStyle: TextStyle(color: Color(0xff710019)),
+                        hintStyle: TextStyle(color: Color(0xff710019)),
                           prefixIcon: Icon(Icons.search),
+                        prefixIconColor: color,
+                        suffixIconColor: color,
+                        focusedBorder: textFormBorder(),
                           //suffixIcon: Icon(Icons.check),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),borderSide: BorderSide(color: color)),
                       ),
                     ),
                     SizedBox(height: 10.0,),
@@ -142,4 +148,12 @@ class Search_screan extends StatelessWidget {
       color: Colors.grey[300],
     ),
   );
+
+  OutlineInputBorder textFormBorder() {
+    return OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(16.0)),
+        borderSide: BorderSide(
+          color: Color(0xff710019),
+        ));
+  }
 }

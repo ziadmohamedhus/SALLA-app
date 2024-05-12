@@ -17,9 +17,9 @@ class On_BordinBoarding extends StatefulWidget {
 
 class _On_BordinBoardingState extends State<On_BordinBoarding> {
   List<Boarding_model> Boarding_list=[
-    Boarding_model(image: 'https://lottie.host/0a395547-5484-4006-9159-db2280edf326/mEY9XLlB86.json',title: 'First page',body: 'First page'),
-    Boarding_model(image: 'https://lottie.host/a4d4601e-28db-4ab7-8b73-cb0dbd1cfe95/yEStIKauuW.json',title: 'Second page',body: 'Second page'),
-    Boarding_model(image: 'https://lottie.host/55ef5a0a-b143-482a-9ba7-a095d3c94094/3SKdpEp04u.json',title: 'third page',body: 'third page'),
+    Boarding_model(image: 'https://lottie.host/0dd58b42-a454-4c82-aeae-e01e12df7e6a/SkETIBvBFu.json',title: 'First page',body: 'First page'),
+    Boarding_model(image: 'https://lottie.host/f4ac058e-f434-49e6-9d62-1872a069cb24/aHUnwsEsKv.json',title: 'Second page',body: 'Second page'),
+    Boarding_model(image: 'https://lottie.host/d5ed7aa9-4c95-4129-b203-667191453cc7/Q9zN9fakxD.json',title: 'third page',body: 'third page'),
   ];
 
   var Boarding_controler=PageController();

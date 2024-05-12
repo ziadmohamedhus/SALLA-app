@@ -6,10 +6,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app/BLOCK/cubit.dart';
 import 'package:store_app/BLOCK/states.dart';
 
+import '../../COMPONENTS/components.dart';
 import '../../MODELS/product-details-model.dart';
 
-class View_product extends StatelessWidget {
+class View_product extends StatefulWidget {
 
+  @override
+  State<View_product> createState() => _View_productState();
+}
+
+class _View_productState extends State<View_product>with SingleTickerProviderStateMixin {
+  late AnimationController animationController;
+  late Animation<Offset> slidingAniimation1;
+  @override
+  void initState() {
+    super.initState();
+    initSlidingAnimation();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose(); // Dispose of the animation controller
+    super.dispose();
+    }
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit,AppStates>(
@@ -18,12 +37,13 @@ class View_product extends StatelessWidget {
         return ConditionalBuilder(
           condition: state is! Get_Details_loading_state,
           builder: (BuildContext context) =>Page_content(context,AppCubit.get(context).product_details,),
-          fallback: (BuildContext context) =>Center(child: CircularProgressIndicator()),
+          fallback: (BuildContext context) =>Center(child: CircularProgressIndicator(color: color,)),
         );
       },
 
     );
   }
+
   Widget Page_content(context,Product_Details? model)
   {
     List<Image> images=[];
@@ -32,7 +52,7 @@ class View_product extends StatelessWidget {
         images.add(Image.network(model.data!.images![i]));
       }
     return Scaffold(
-      appBar: AppBar(title: Text('SALLA',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
+      appBar: AppBar(title: Text('SALLA',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),centerTitle: true,),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -49,12 +69,19 @@ class View_product extends StatelessWidget {
               SizedBox(height: 20,),
               Text('Name: ${model.data!.name}  ',style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold,),),
               SizedBox(height: 10,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Price: \$${model.data!.price}',style: TextStyle(color:Colors.blue,fontSize: 20.0,fontWeight: FontWeight.bold,)),
-                  Text('Old Price: \$${model.data!.oldPrice}',style: TextStyle(color:Colors.red,fontSize: 20.0,fontWeight: FontWeight.bold,decoration: TextDecoration.lineThrough)),
-                ],
+              AnimatedBuilder(
+                animation: slidingAniimation1,
+                builder: (context, _) =>
+                 SlideTransition(
+                  position: slidingAniimation1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Price: \$${model.data!.price}',style: TextStyle(color:Colors.blue,fontSize: 20.0,fontWeight: FontWeight.bold,)),
+                      Text('Old Price: \$${model.data!.oldPrice}',style: TextStyle(color:Colors.red,fontSize: 20.0,fontWeight: FontWeight.bold,decoration: TextDecoration.lineThrough)),
+                    ],
+                  ),
+                ),
               ),
 
               // Animation
@@ -89,4 +116,14 @@ class View_product extends StatelessWidget {
       ),
     );
   }
+
+  void initSlidingAnimation() {
+    animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 4));
+    slidingAniimation1 =
+        Tween<Offset>(begin: const Offset(8, 0), end: Offset.zero)
+            .animate(animationController);
+
+    animationController.forward();
+    }
 }

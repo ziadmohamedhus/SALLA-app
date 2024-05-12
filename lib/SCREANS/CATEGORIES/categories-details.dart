@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../BLOCK/cubit.dart';
 import '../../BLOCK/states.dart';
+import '../../COMPONENTS/components.dart';
 import '../../MODELS/categories-details-model.dart';
 
 class Categories_Details extends StatelessWidget {
@@ -26,7 +27,7 @@ class Categories_Details extends StatelessWidget {
               separatorBuilder: (context, index) => myDivider(),
               itemCount: AppCubit.get(context).categoryDetails!.data!.productData!.length,
             ),
-            fallback: (context) => Center(child: CircularProgressIndicator()),
+            fallback: (context) => Center(child: CircularProgressIndicator(color: color,)),
           ),
         );
       },
